@@ -9,7 +9,7 @@ require 'faker'
 
 User.destroy_all
 City.destroy_all
-Listing.destroy_all
+Listening.destroy_all
 Reservation.destroy_all
 
 # Создаем пользователей
@@ -31,26 +31,26 @@ end
 
 # Создаем жилье
 50.times do
-  Listing.create(
+  Listening.create(
     available_beds: Faker::Number.between(from: 1, to: 5),
     price: Faker::Number.between(from: 30, to: 200),
-    description: Faker::Lorem.paragraph(3),
+    description: Faker::Lorem.paragraph,
     has_wifi: [true, false].sample,
     welcome_message: Faker::Lorem.sentence,
-    user_id: User.pluck(:id).sample, # Выбираем случайного пользователя
+    admin_id: User.pluck(:id).sample, # Выбираем случайного пользователя
     city_id: City.pluck(:id).sample  # Выбираем случайный город
   )
 end
 
 # Создаем бронирования для каждого жилья
-Listing.all.each do |listing|
+Listening.all.each do |listing|
     5.times do
       start_date = Faker::Date.backward(days: 30) # Бронирование в прошлом
       end_date = start_date + rand(2..7).days # Продолжительность бронирования от 2 до 7 дней
       Reservation.create(
         start_date: start_date,
         end_date: end_date,
-        user_id: User.pluck(:id).sample,
+        guest_id: User.pluck(:id).sample,
         listing_id: listing.id
       )
     end
@@ -61,7 +61,7 @@ Listing.all.each do |listing|
       Reservation.create(
         start_date: start_date,
         end_date: end_date,
-        user_id: User.pluck(:id).sample,
+        guest_id: User.pluck(:id).sample,
         listing_id: listing.id
       )
     end
