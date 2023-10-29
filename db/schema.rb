@@ -40,12 +40,12 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_27_125537) do
   create_table "reservations", force: :cascade do |t|
     t.datetime "start_date"
     t.datetime "end_date"
-    t.bigint "listing_id"
+    t.bigint "listening_id"
     t.bigint "guest_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["guest_id"], name: "index_reservations_on_guest_id"
-    t.index ["listing_id"], name: "index_reservations_on_listing_id"
+    t.index ["listening_id"], name: "index_reservations_on_listening_id"
   end
 
   create_table "users", force: :cascade do |t|

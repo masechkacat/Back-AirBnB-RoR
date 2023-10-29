@@ -1,11 +1,6 @@
 class City < ApplicationRecord
-  has_many :listings
+  has_many :listenings
 
-  validates :name,
-  presence: true
-  validates :zip_code,
-  presence: true,
-  uniqueness: true,
-  format: { with: /\A(([0-8][0-9])|(9[0-5])|(2[ab]))[0-9]{3}\z/,
-  message: "please enter a valid French zip code" }
+  validates :name, presence: true
+  validates :zip_code, presence: true, uniqueness: true, format: { with: /\A\d+\z/, message: "please enter a valid zip code" }
 end
